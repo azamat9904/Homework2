@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {lazy,Suspense} from 'react';
 import {Link, Route, Switch} from 'react-router-dom';
 import './App.scss';
-import Home from './Pages/Home/Home';
-import Post from './Pages/Post/Post';
-import PostDetail from './Pages/PostDetail/PostDetail';
+const Post = lazy(()=>import('./Pages/Post/Post'));
+const PostDetail = lazy(()=>import('./Pages/PostDetail/PostDetail'));
+const Home = lazy(()=>import('./Pages/Home/Home'));
 
 function App() {
     return (
@@ -21,12 +21,14 @@ function App() {
                 </nav>
             </div>
             <div className="App-content">
-                <Switch>
-                    <Route path="/" exact render={() =><Home/>}/>
-                    <Route path = "/posts" exact render = {()=><Post />} />
-                    <Route path = "/posts/:id" render={()=><PostDetail />} />
-                    <Route path = "*" render = {()=><h1>Route is not found</h1>} />
-                </Switch>
+               <Suspense fallback={<div>Loading... </div>}>
+                   <Switch>
+                       <Route path="/" exact render={() =><Home/>}/>
+                       <Route path = "/posts" exact render = {()=><Post />} />
+                       <Route path = "/posts/:id" render={()=><PostDetail />} />
+                       <Route path = "*" render = {()=><h1>Route is not found</h1>} />
+                   </Switch>
+               </Suspense>
             </div>
         </div>
     );
