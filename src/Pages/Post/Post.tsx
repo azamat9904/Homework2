@@ -4,6 +4,7 @@ import {postApi} from "../../API/PostApi";
 import s from './Post.module.scss';
 import {Link} from "react-router-dom";
 import Button from "../../Components/Button/Button";
+import Loading from "../../Components/Loading/Loading";
 
 const Post:React.FunctionComponent = ()=>{
     const [posts,setPosts] = useState<Array<IPost>>([]);
@@ -26,7 +27,7 @@ const Post:React.FunctionComponent = ()=>{
     );
 
     return (
-        posts.length === 0 ? <div>Loading... </div> :
+        posts.length === 0 ? <Loading />:
         <div className={s.postsWrapper}>
             {postsTemplate}
         </div>

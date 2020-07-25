@@ -1,6 +1,7 @@
 import React, {lazy,Suspense} from 'react';
 import {Link, Route, Switch} from 'react-router-dom';
 import './App.scss';
+import Loading from './Components/Loading/Loading';
 const Post = lazy(()=>import('./Pages/Post/Post'));
 const PostDetail = lazy(()=>import('./Pages/PostDetail/PostDetail'));
 const Home = lazy(()=>import('./Pages/Home/Home'));
@@ -21,7 +22,7 @@ function App() {
                 </nav>
             </div>
             <div className="App-content">
-               <Suspense fallback={<div>Loading... </div>}>
+               <Suspense fallback={<Loading />}>
                    <Switch>
                        <Route path="/" exact render={() =><Home/>}/>
                        <Route path = "/posts" exact render = {()=><Post />} />

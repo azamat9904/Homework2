@@ -5,6 +5,7 @@ import {IPost} from "../../Interfaces/interfaces";
 import {postApi} from "../../API/PostApi";
 import {RouteComponentProps} from 'react-router-dom';
 import s from '../PostDetail/PostDetail.module.scss';
+import Loading from '../../Components/Loading/Loading';
 
 type Params = {
     id:string
@@ -19,7 +20,7 @@ const PostDetail = ({match}:RouteComponentProps<Params>)=>{
     });
 
     return(
-        postDetail.id === null ?<div>Loading...</div>:
+        postDetail.id === null ?<Loading />:
         <div className={s.postDetailWrapper}>
             <h3 className={s.postDetailHeading}>Post detail</h3>
             <div className={s.postDetail}>
